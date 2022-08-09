@@ -20,7 +20,7 @@
 
         #pm25-table {
             width: 80%;
-            margin: 0px auto;
+            margin: 12px auto;
             border: 1px solid black;
         }
 
@@ -37,12 +37,32 @@
             background-color: white;
             color: black;
         }
+
+        input[type="submit"] {
+            background-color: lawngreen;
+            border-radius: 6px;
+            padding: 6px;
+            width: 80px;
+        }
+
+        .date {
+            background-color: gold;
+            color: navy;
+            display: inline-block;
+            padding: 6px;
+            border-radius: 6px;
+        }
     </style>
 </head>
 
 <body>
     <div id="container">
         <h1>PM2.5全台資訊網</h1>
+        <p class="date">{{date}}</p>
+        <form action="/pm25" method="POST">
+            <input type="submit" name="update" value="更新">
+            <input type="submit" name="sort" value="排序">
+        </form>
         <table id="pm25-table">
             <thead>
                 <tr>

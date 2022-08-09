@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from datetime import datetime
 from scrape.pm25 import get_pm25
 
@@ -6,11 +6,18 @@ from scrape.pm25 import get_pm25
 app = Flask(__name__)
 
 
-@app.route('/pm25')
+@app.route('/pm25', methods=['GET', 'POST'])
 def pm25():
-    columns, values = get_pm25()
+    sort = False
+    # 使用GET接收
+    # if request.args.get('sort'):
+    #     sort = True
 
-    print(columns, values)
+    if request.method == 'POST':
+        sort = True if request.form.get('sort') else False      
+
+    date=get_today()
+    columns, values = get_pm25(sort=sort)
 
     return render_template('./pm25.html', **locals())
 
