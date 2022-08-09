@@ -1,9 +1,18 @@
 from flask import Flask, render_template
 from datetime import datetime
+from scrape.pm25 import get_pm25
 
-from sympy import EX, content
-# __name__==>main.py
+
 app = Flask(__name__)
+
+
+@app.route('/pm25')
+def pm25():
+    columns, values = get_pm25()
+
+    print(columns, values)
+
+    return render_template('./pm25.html', **locals())
 
 
 @app.route('/stock')
@@ -15,7 +24,9 @@ def get_stock():
         {'分類': '上海綜合', '指數': '3,380.68'}
     ]
 
-    return render_template('./stock.html', stocks=stocks)
+    date = get_today()
+
+    return render_template('./stock.html', **locals())
 
 
 @app.route('/bmi/name=<name>&height=<height>&weight=<weight>')
@@ -57,6 +68,6 @@ def get_today():
 
 
 if __name__ == '__main__':
-    print(get_today())
-    print(get_bmi('jerry', '167', '67'))
+    # print(pm25())
+    # print(get_bmi('jerry', '167', '67'))
     app.run(debug=True)

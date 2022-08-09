@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM2.5全台資訊網</title>
+
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        #container {
+            width: 80%;
+            margin: 0px auto;
+            text-align: center;
+        }
+
+        #pm25-table {
+            width: 80%;
+            margin: 0px auto;
+            border: 1px solid black;
+        }
+
+        #pm25-table th {
+            background-color: tomato;
+        }
+
+        td,
+        th {
+            border: 2px slateblue solid;
+        }
+
+        td {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>PM2.5全台資訊網</h1>
+        <table id="pm25-table">
+            <thead>
+                <tr>
+                    {% for column in columns%}
+                    <th>{{column}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for value in values %}
+                <tr>
+                    {% for data in value %}
+                    <td>{{data}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

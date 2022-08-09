@@ -39,12 +39,21 @@
             text-align: center;
 
         }
+
+        .date {
+            color: brown;
+            font-weight: bold;
+            font-size: 20px;
+        }
     </style>
 </head>
 
 <body>
     <div id="container">
         <h1>亞股資訊</h1>
+        <p class="date">
+            {{date}}
+        </p>
         {% for stock in stocks %}
         <li>
             <span class="category">{{stock['分類']}}</span>
