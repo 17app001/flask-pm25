@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: gold;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            display: inline-block;
+            background-color: black;
+            color: orange;
+            padding: 12px;
+            border-radius: 6px;
+            width: 200px;
+            margin-top: 6px;
+        }
+
+        .index {
+            color: red;
+            background-color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+
+        #container {
+            width: 80%;
+            margin: 64px auto;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>亞股資訊</h1>
+        {% for stock in stocks %}
+        <li>
+            <span class="category">{{stock['分類']}}</span>
+            &nbsp;
+            <span class="index">{{stock['指數']}}</span>
+        </li>
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>
