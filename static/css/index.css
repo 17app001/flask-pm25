@@ -1,44 +1,4 @@
-body {
-    background-color: antiquewhite;
-}
-
-#container {
-    width: 80%;
-    margin: 0px auto;
-    text-align: center;
-}
-
-#pm25-table {
-    width: 80%;
-    margin: 12px auto;
-    border: 1px solid black;
-}
-
-#pm25-table th {
-    background-color: tomato;
-}
-
-td,
-th {
-    border: 2px slateblue solid;
-}
-
-td {
-    background-color: white;
-    color: black;
-}
-
-input[type="submit"] {
-    background-color: lawngreen;
-    border-radius: 6px;
-    padding: 6px;
-    width: 80px;
-}
-
-.date {
-    background-color: gold;
-    color: navy;
-    display: inline-block;
-    padding: 6px;
-    border-radius: 6px;
+#main{
+    width: 1024px;
+    height:600px;
 }

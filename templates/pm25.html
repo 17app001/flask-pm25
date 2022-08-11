@@ -8,10 +8,10 @@
     <title>PM2.5全台資訊網</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
-    <link rel="stylesheet" href="{{url_for('static',filename='./css/index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='./css/pm25.css')}}">
 </head>
 
-<body>
+<body onload="showTime()">
     <div id="container">
         <h1>PM2.5全台資訊網</h1>
         <p class="date">{{date}}</p>
@@ -19,6 +19,7 @@
             <input type="submit" name="update" id="update" value="更新">
             <input type="submit" name="sort" id="sort" value="排序">
         </form>
+        <a href="/">首頁</a>
         <table id="pm25-table">
             <thead>
                 <tr>
@@ -39,7 +40,7 @@
         </table>
     </div>
 </body>
-<script src="../static/js/index.js">
+<script src="../static/js/pm25.js">
 </script>
 
 </html>

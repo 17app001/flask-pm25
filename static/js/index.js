@@ -1,25 +1,45 @@
-showTime();
 
-function showTime() {
-    $(".date").text(getTime());
-    setTimeout(() => {
-        showTime();
-    }, 1000);
+drawPM25();
+
+function drawPM25() {
+    $.ajax(
+        {
+            url: "/pm25-json",
+            type: "POST",
+            dataType: "json",
+            success: (data) => {
+                console.log(data);
+                drawPM25Charts(data);
+            },
+            error: () => {
+                alert("讀取失敗!");
+            }
+        }
+    );
 }
 
+function drawPM25Charts(data) {
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title: {
+            text: 'PM2.5全台資訊圖'
+        },
+        tooltip: {},
+        legend: {
+            data: ['PM2.5']
+        },
+        xAxis: {
+            data: data['stationName']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '數值',
+                type: 'bar',
+                data: data['result']
+            }
+        ]
+    };
 
-function getTime(fullTime = true) {
-    let now = new Date();
-    let year = now.getFullYear();
-    let month = now.getMonth() + 1;
-    let date = now.getDate();
-    let hours = now.getHours();
-    let minutes = String(now.getMinutes()).padStart(2, "0");
-    let seconds = String(now.getSeconds()).padStart(2, "0");
-
-    if (fullTime) {
-        return `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
-    }
-
-    return `${year}/${month}/${date}`;
+    myChart.setOption(option);
 }

@@ -1,9 +1,27 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 from scrape.pm25 import get_pm25
-
+import json
 
 app = Flask(__name__)
+
+
+@app.route('/pm25-charts')
+def pm25_charts():
+    return render_template('./pm25-charts.html')
+
+
+# 取得資料庫或爬蟲的資料回傳json資料結構
+@app.route('/pm25-json', methods=['GET','POST'])
+def pm25_json():
+    columns, values = get_pm25()
+
+    stationName = [value[1] for value in values]
+    result = [value[2] for value in values]
+
+    data = {'stationName': stationName, 'result': result}
+
+    return json.dumps(data, ensure_ascii=False)
 
 
 @app.route('/pm25', methods=['GET', 'POST'])
@@ -12,11 +30,10 @@ def pm25():
     # 使用GET接收
     # if request.args.get('sort'):
     #     sort = True
-
     if request.method == 'POST':
-        sort = True if request.form.get('sort') else False      
+        sort = True if request.form.get('sort') else False
 
-    date=get_today()
+    date = get_today()
     columns, values = get_pm25(sort=sort)
 
     return render_template('./pm25.html', **locals())
