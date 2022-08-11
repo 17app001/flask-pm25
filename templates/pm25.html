@@ -6,53 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PM2.5全台資訊網</title>
-
-    <style>
-        body {
-            background-color: antiquewhite;
-        }
-
-        #container {
-            width: 80%;
-            margin: 0px auto;
-            text-align: center;
-        }
-
-        #pm25-table {
-            width: 80%;
-            margin: 12px auto;
-            border: 1px solid black;
-        }
-
-        #pm25-table th {
-            background-color: tomato;
-        }
-
-        td,
-        th {
-            border: 2px slateblue solid;
-        }
-
-        td {
-            background-color: white;
-            color: black;
-        }
-
-        input[type="submit"] {
-            background-color: lawngreen;
-            border-radius: 6px;
-            padding: 6px;
-            width: 80px;
-        }
-
-        .date {
-            background-color: gold;
-            color: navy;
-            display: inline-block;
-            padding: 6px;
-            border-radius: 6px;
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
+    <link rel="stylesheet" href="{{url_for('static',filename='./css/index.css')}}">
 </head>
 
 <body>
@@ -60,8 +16,8 @@
         <h1>PM2.5全台資訊網</h1>
         <p class="date">{{date}}</p>
         <form action="/pm25" method="POST">
-            <input type="submit" name="update" value="更新">
-            <input type="submit" name="sort" value="排序">
+            <input type="submit" name="update" id="update" value="更新">
+            <input type="submit" name="sort" id="sort" value="排序">
         </form>
         <table id="pm25-table">
             <thead>
@@ -83,5 +39,7 @@
         </table>
     </div>
 </body>
+<script src="../static/js/index.js">
+</script>
 
 </html>
