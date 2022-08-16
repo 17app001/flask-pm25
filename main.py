@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from datetime import datetime
-from scrape.pm25 import get_pm25
+from scrape.pm25 import get_pm25,get_six_pm25
 import json
 
 app = Flask(__name__)
@@ -10,6 +10,11 @@ app = Flask(__name__)
 def pm25_charts():
     return render_template('./pm25-charts.html')
 
+@app.route('/six-pm25-json', methods=['GET','POST'])
+def six_pm25_json():
+    cities, result = get_six_pm25()
+    data = {'cities': cities, 'result': result}
+    return json.dumps(data, ensure_ascii=False)
 
 # 取得資料庫或爬蟲的資料回傳json資料結構
 @app.route('/pm25-json', methods=['GET','POST'])
@@ -19,7 +24,7 @@ def pm25_json():
     stationName = [value[1] for value in values]
     result = [value[2] for value in values]
 
-    data = {'stationName': stationName, 'result': result}
+    data = {'date':get_today(),'stationName': stationName, 'result': result}
 
     return json.dumps(data, ensure_ascii=False)
 
